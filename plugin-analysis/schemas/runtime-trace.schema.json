@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/plugin-analysis/runtime-trace.schema.json",
+  "title": "Claude Code Plugin Runtime Trace",
+  "description": "Redacted behavioral trace for validating a statically reconstructed plugin workflow.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "trace",
+    "events",
+    "final"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "plugin_name",
+        "plugin_version",
+        "scenario",
+        "started_at",
+        "ended_at",
+        "environment",
+        "redaction_applied"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "plugin_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "plugin_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scenario": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "ended_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cwd",
+            "repo_commit",
+            "claude_code_version"
+          ],
+          "properties": {
+            "cwd": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "repo_commit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "claude_code_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "redaction_applied": {
+          "type": "boolean"
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "seq",
+          "actor",
+          "event_type",
+          "operation",
+          "status",
+          "parent_event_id",
+          "parallel_group",
+          "input_summary",
+          "output_summary",
+          "state_changes",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "seq": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "actor": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "trigger",
+              "context_read",
+              "decision",
+              "skill",
+              "agent_spawn",
+              "agent_return",
+              "tool_call",
+              "hook",
+              "mcp_call",
+              "script",
+              "state_change",
+              "verification",
+              "retry",
+              "fallback",
+              "output",
+              "error",
+              "other"
+            ]
+          },
+          "operation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "started",
+              "completed",
+              "failed",
+              "skipped",
+              "blocked",
+              "unknown"
+            ]
+          },
+          "parent_event_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "parallel_group": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "input_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "output_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "duration_ms": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "state_changes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "source",
+                "locator",
+                "observation",
+                "confidence"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "source",
+                    "runtime",
+                    "config",
+                    "documentation",
+                    "external"
+                  ]
+                },
+                "source": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "observation": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "final": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "output_summary",
+        "files_modified",
+        "external_mutations",
+        "errors"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "partial",
+            "failed",
+            "blocked",
+            "unknown"
+          ]
+        },
+        "output_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "files_modified": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_mutations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

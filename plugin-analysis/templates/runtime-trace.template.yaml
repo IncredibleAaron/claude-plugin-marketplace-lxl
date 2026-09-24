@@ -1,0 +1,40 @@
+schema_version: "1.0"
+trace:
+  id: null
+  plugin_name: null
+  plugin_version: null
+  scenario: null
+  started_at: null
+  ended_at: null
+  environment:
+    cwd: null
+    repo_commit: null
+    claude_code_version: null
+  redaction_applied: true
+
+events: []
+# Example:
+# - id: E001
+#   seq: 1
+#   actor: user
+#   event_type: trigger
+#   operation: invoke_review
+#   status: completed
+#   parent_event_id: null
+#   parallel_group: null
+#   input_summary: "User invoked /review"
+#   output_summary: null
+#   state_changes: []
+#   evidence:
+#     - kind: runtime
+#       source: trace
+#       locator: E001
+#       observation: "Slash command invoked"
+#       confidence: 1.0
+
+final:
+  status: unknown
+  output_summary: null
+  files_modified: []
+  external_mutations: []
+  errors: []

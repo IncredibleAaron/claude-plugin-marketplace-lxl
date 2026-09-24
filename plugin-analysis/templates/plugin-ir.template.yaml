@@ -1,0 +1,76 @@
+schema_version: "1.0"
+plugin:
+  name: null
+  version: null
+  repository: null
+  primary_goal: null
+  success_conditions: []
+  non_goals: []
+  status: unknown
+  evidence: []
+
+source:
+  root: null
+  analyzed_commit: null
+  analyzed_at: null
+
+inventory:
+  files: []
+  components:
+    commands: []
+    skills: []
+    agents: []
+    hooks: []
+    scripts: []
+    mcp_servers: []
+    settings: []
+
+entrypoints: []
+
+workflow:
+  nodes: []
+  edges: []
+
+agent_call_graph:
+  calls: []
+
+operations: []
+
+context:
+  sources: []
+  propagation: []
+
+state:
+  stores: []
+
+permissions:
+  capabilities: []
+
+side_effects: []
+
+failure_recovery:
+  cases: []
+
+termination:
+  conditions: []
+
+outputs: []
+
+verification:
+  checks: []
+
+platform_dependencies:
+  items: []
+
+boundaries:
+  plugin_provides: []
+  runtime_provides: []
+  external_provides: []
+  cannot_do: []
+
+runtime_validation:
+  trace_file: null
+  compared: false
+  discrepancies: []
+
+unresolved_questions: []
